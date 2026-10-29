@@ -100,6 +100,14 @@ h2 { font-size: clamp(22px, 3vw, 28px); font-weight: 800; color: var(--navy); li
 .about-features { list-style: none; background: #f6f9fd; border-radius: var(--radius); padding: 14px 18px; }
 .about-features li { display: flex; gap: 14px; align-items: center; padding: 8px 0; font-size: 14px; }
 .about-features i { color: var(--navy); width: 20px; text-align: center; }
+.about-more { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; padding: 8px 0 20px; }
+.about-block h3 { font-size: 18px; color: var(--navy); }
+.about-block p { color: var(--muted); margin-top: 10px; font-size: 15px; }
+.about-pillars { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pillar { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.pillar i { color: var(--blue-bright); font-size: 22px; }
+.pillar h4 { font-size: 16px; color: var(--navy); margin-top: 10px; }
+.pillar p { color: var(--muted); font-size: 14px; margin-top: 6px; }
 
 /* Industries */
 .industries { padding: 22px 0 28px; }
@@ -193,6 +201,7 @@ h2 { font-size: clamp(22px, 3vw, 28px); font-weight: 800; color: var(--navy); li
   .link-arrow { margin-top: 8px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .about-grid { grid-template-columns: 1fr; }
+  .about-more, .about-pillars { grid-template-columns: 1fr; gap: 20px; }
   .stat { padding: 0 14px; }
   .stat strong { font-size: 24px; }
   .industries-row { grid-template-columns: repeat(2, 1fr); }
