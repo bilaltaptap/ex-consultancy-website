@@ -62,13 +62,32 @@ document.querySelectorAll(".services, .about, .industries, .testi-cta, .contact"
   io.observe(s);
 });
 
-// Contact form -> opens WhatsApp with the message prefilled (no backend needed)
+// Contact form -> emails the request (via FormSubmit, no backend needed) and opens WhatsApp prefilled
 document.getElementById("contactForm").addEventListener("submit", e => {
   e.preventDefault();
   const f = new FormData(e.target);
   const text = `Hello! I'd like a free consultation.%0A%0AName: ${f.get("name")}%0APhone: ${f.get("phone")}%0AEmail: ${f.get("email")}%0AService: ${f.get("service")}%0AMessage: ${f.get("message")}`;
-  document.getElementById("formNote").textContent = "Thank you! Opening WhatsApp to send your request…";
-  window.open(`https://wa.me/923001234567?text=${text}`, "_blank");
+  const note = document.getElementById("formNote");
+  note.textContent = "Thank you! Sending your request and opening WhatsApp…";
+  window.open(`https://wa.me/923112021176?text=${text}`, "_blank");
+
+  fetch("https://formsubmit.co/ajax/yabzzconsultancy@gmail.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      _subject: `New consultation request – ${f.get("service")}`,
+      _template: "table",
+      name: f.get("name"),
+      phone: f.get("phone"),
+      email: f.get("email"),
+      service: f.get("service"),
+      message: f.get("message")
+    })
+  })
+    .then(r => r.json())
+    .then(d => { note.textContent = d.success === "true" || d.success === true ? "Thank you! Your request has been emailed to us." : "Thank you! We received your request on WhatsApp."; })
+    .catch(() => { note.textContent = "Thank you! We received your request on WhatsApp."; });
+
   e.target.reset();
 });
 

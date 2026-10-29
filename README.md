@@ -5,13 +5,18 @@ Static site (HTML/CSS/JS) — no build step.
 ## Files
 - `index.html` – page content
 - `style.css` – styles (colors at the top under `:root`)
-- `script.js` – mobile menu, testimonial slider, counters, contact form (sends to WhatsApp)
+- `script.js` – mobile menu, testimonial slider, counters, contact form (emails via FormSubmit + opens WhatsApp)
 - `render.yaml` – Render deployment config
 
 ## Customize
 Search & replace in `index.html`:
 - Logo: `images/ex-consultancy-logo.jpg` (original supplied logo, do not modify)
-- `info@yourfirm.com`, `+92 300 1234567` / `923001234567` (also in `script.js`)
+- `Yabzzconsultancy@gmail.com`, `+92 311 2021176` / `923112021176` (also in `script.js`)
+
+## Contact form email
+The form posts to FormSubmit (`https://formsubmit.co/ajax/yabzzconsultancy@gmail.com`).
+The first submission sends an activation email to that inbox — click **Activate Form** once,
+after which every submission arrives as an email.
 - Social links (`href="#"`)
 
 Images load from Unsplash. To use your own, put files in an `images/` folder and change the URLs
