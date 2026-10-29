@@ -5,7 +5,7 @@ Static site (HTML/CSS/JS) — no build step.
 ## Files
 - `index.html` – page content
 - `style.css` – styles (colors at the top under `:root`)
-- `script.js` – mobile menu, testimonial slider, counters, contact form (emails via FormSubmit + opens WhatsApp)
+- `script.js` – mobile menu, testimonial slider, counters, contact form (emails via FormSubmit)
 - `render.yaml` – Render deployment config
 
 ## Customize

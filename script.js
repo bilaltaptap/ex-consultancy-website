@@ -62,14 +62,16 @@ document.querySelectorAll(".services, .about, .industries, .testi-cta, .contact"
   io.observe(s);
 });
 
-// Contact form -> emails the request (via FormSubmit, no backend needed) and opens WhatsApp prefilled
+// Contact form -> emails the request via FormSubmit (no backend needed)
 document.getElementById("contactForm").addEventListener("submit", e => {
   e.preventDefault();
-  const f = new FormData(e.target);
-  const text = `Hello! I'd like a free consultation.%0A%0AName: ${f.get("name")}%0APhone: ${f.get("phone")}%0AEmail: ${f.get("email")}%0AService: ${f.get("service")}%0AMessage: ${f.get("message")}`;
+  const form = e.target;
+  const f = new FormData(form);
   const note = document.getElementById("formNote");
-  note.textContent = "Thank you! Sending your request and opening WhatsApp…";
-  window.open(`https://wa.me/923112021176?text=${text}`, "_blank");
+  const btn = form.querySelector("button[type=submit]");
+  note.classList.remove("error");
+  note.textContent = "Sending your request…";
+  btn.disabled = true;
 
   fetch("https://formsubmit.co/ajax/yabzzconsultancy@gmail.com", {
     method: "POST",
@@ -85,10 +87,16 @@ document.getElementById("contactForm").addEventListener("submit", e => {
     })
   })
     .then(r => r.json())
-    .then(d => { note.textContent = d.success === "true" || d.success === true ? "Thank you! Your request has been emailed to us." : "Thank you! We received your request on WhatsApp."; })
-    .catch(() => { note.textContent = "Thank you! We received your request on WhatsApp."; });
-
-  e.target.reset();
+    .then(d => {
+      if (d.success !== "true" && d.success !== true) throw new Error(d.message);
+      note.textContent = "Thank you! Your request has been sent. We'll get back to you within one business day.";
+      form.reset();
+    })
+    .catch(() => {
+      note.classList.add("error");
+      note.textContent = "Sorry, your message couldn't be sent. Please call or email us directly.";
+    })
+    .finally(() => { btn.disabled = false; });
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
